@@ -17,11 +17,6 @@
             android:exported="false"
             android:theme="@style/Theme.OpenBubblesSampleExtension" />
 
-        <receiver
-            android:name=".KeyboardClickReceiver"
-            android:enabled="true"
-            android:exported="true" />
-
         <service
             android:name=".MadridExtensionService"
             android:enabled="true"
