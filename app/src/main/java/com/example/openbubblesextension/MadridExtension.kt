@@ -86,7 +86,7 @@ class MadridExtension(private val context: Context) : IMadridExtension.Stub() {
     val keyboardRemoteViews = GlanceRemoteViews()
 
     @OptIn(ExperimentalGlanceRemoteViewsApi::class)
-    override fun keyboardOpened(callback: IViewUpdateCallback?, handle: IKeyboardHandle?): RemoteViews {
+    override fun keyboardOpened(callback: IViewUpdateCallback?, handle: IKeyboardHandle?, userCount: Int): RemoteViews {
         this.callback = callback
 
         currentKeyboardHandle = handle
@@ -105,7 +105,7 @@ class MadridExtension(private val context: Context) : IMadridExtension.Stub() {
         return result.remoteViews
     }
 
-    override fun didTapTemplate(message: MadridMessage?, handle: IMessageViewHandle?) {
+    override fun didTapTemplate(message: MadridMessage?, handle: IMessageViewHandle?, userCount: Int) {
         val intent = Intent(context, MessageActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         context.startActivity(intent)
@@ -124,7 +124,8 @@ class MadridExtension(private val context: Context) : IMadridExtension.Stub() {
     override fun getLiveView(
         callback: IViewUpdateCallback?,
         message: MadridMessage?,
-        handle: IMessageViewHandle?
+        handle: IMessageViewHandle?,
+        userCount: Int
     ): RemoteViews {
         Log.i("live view", "init")
         val displayMetrics = context.resources.displayMetrics
