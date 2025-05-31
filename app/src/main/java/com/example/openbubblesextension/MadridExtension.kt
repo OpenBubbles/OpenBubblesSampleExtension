@@ -29,7 +29,7 @@ class MadridExtension(private val context: Context) : IMadridExtension.Stub() {
         currentKeyboardHandle = null
     }
 
-    override fun keyboardOpened(callback: IViewUpdateCallback?, handle: IKeyboardHandle?): RemoteViews {
+    override fun keyboardOpened(callback: IViewUpdateCallback?, handle: IKeyboardHandle?, userCount: Int): RemoteViews {
         this.callback = callback
         var view = RemoteViews(context.packageName, R.layout.keyboard)
 
@@ -48,7 +48,7 @@ class MadridExtension(private val context: Context) : IMadridExtension.Stub() {
         return view
     }
 
-    override fun didTapTemplate(message: MadridMessage?, handle: IMessageViewHandle?) {
+    override fun didTapTemplate(message: MadridMessage?, handle: IMessageViewHandle?, userCount: Int) {
 //        val intent = Intent(context, MessageActivity::class.java)
 //        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
 //        context.startActivity(intent)
@@ -66,7 +66,8 @@ class MadridExtension(private val context: Context) : IMadridExtension.Stub() {
     override fun getLiveView(
         callback: IViewUpdateCallback?,
         message: MadridMessage?,
-        handle: IMessageViewHandle?
+        handle: IMessageViewHandle?,
+        userCount: Int
     ): RemoteViews {
         Log.i("live view", "init")
         var view = RemoteViews(context.packageName, R.layout.livemsg)
